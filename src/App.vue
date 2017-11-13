@@ -92,7 +92,13 @@ export default {
 }
 </script>
 
-<style>
+<style leng="less">
+@import url('//at.alicdn.com/t/font_473583_okthm8xvghpsnhfr.css');
+
+body, a, div, i, img, ul, li {
+    cursor: url(http://www.aktax.cn/Select.cur), default;
+}
+
 html,
 body {
   padding: 0;
@@ -100,10 +106,33 @@ body {
   height: 100%;
   width: 100%;
 }
+@font-face {
+    font-family: "qhx";
+    src: url('./assets/qhx.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #B9B9B9;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #35B995;
+}
+::selection {
+    background: #A0DAD0 !important;
+    color: #fff;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "qhx","Helvetica Neue","Helvetica","Arial","PingFang SC","Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif !important;
+  -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px !important;
+  line-height: 24px !important;
   height: 100%;
   width: 100%;
   /* background-color: #f8f8f8; */
