@@ -97,6 +97,9 @@ export default {
             color: #545454;
             font-weight: normal;
             font-size: 14px;
+            &:hover{
+              color: #A0DAD0;
+            }
           }
         }
       }

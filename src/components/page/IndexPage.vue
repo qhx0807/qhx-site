@@ -3,7 +3,7 @@
     <Home></Home>
     <div class="content">
       <div class="notice">
-        <i class="iconfont icon-shuye">:</i>
+        <i class="iconfont icon-shuye"></i>
         <div class="notice-content">注意： 人生本来就没有相欠。别人对你付</div>
       </div>
     </div>
