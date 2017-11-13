@@ -51,7 +51,7 @@ export default {
   name: 'home',
   data() {
     return {
-      wechatOpcity:1,
+      wechatOpcity:0,
       wechatTsf: 'translate3d(0,50px,0)',
       qqOpcity:0,
       qqTsf: 'translate3d(0,50px,0)',
