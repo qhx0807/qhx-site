@@ -22,21 +22,21 @@
               <i class="iconfont icon-weixin"></i>
               <div class="inner wechat-inner" :style="{opacity: wechatOpcity,transform: wechatTsf}"></div>
             </li>
-            <li>
+            <li @mouseover="onMouseOverWechat(2)" @mouseout="onOutWechat(2)">
               <i class="iconfont icon-QQ"></i>
-              <div class="inner wechat-inner"></div>
+              <div class="inner wechat-inner" :style="{opacity: qqOpcity,transform: qqTsf}"></div>
             </li>
-            <li>
+            <li  @mouseover="onMouseOverWechat(3)" @mouseout="onOutWechat(3)">
               <i class="iconfont icon-weibo"></i>
-              <div class="inner wechat-inner"></div>
+              <div class="inner wechat-inner" :style="{opacity: wbOpcity,transform: wbTsf}"></div>
             </li>
-            <li>
+            <li @mouseover="onMouseOverWechat(4)" @mouseout="onOutWechat(4)">
               <i class="iconfont icon-zhihu"></i>
-              <div class="inner wechat-inner"></div>
+              <div class="inner wechat-inner" :style="{opacity: zhOpcity,transform: zhTsf}"></div>
             </li>
-            <li>
+            <li @mouseover="onMouseOverWechat(5)" @mouseout="onOutWechat(5)">
               <i class="iconfont icon-zhifubao"></i>
-              <div class="inner wechat-inner"></div>
+              <div class="inner wechat-inner" :style="{opacity: zfbOpcity,transform: zfbTsf}"></div>
             </li>
           </ul>
         </div>
@@ -51,8 +51,16 @@ export default {
   name: 'home',
   data() {
     return {
-      wechatOpcity:0,
+      wechatOpcity:1,
       wechatTsf: 'translate3d(0,50px,0)',
+      qqOpcity:0,
+      qqTsf: 'translate3d(0,50px,0)',
+      wbOpcity:0,
+      wbTsf: 'translate3d(0,50px,0)',
+      zhOpcity:0,
+      zhTsf: 'translate3d(0,50px,0)',
+      zfbOpcity:0,
+      zfbTsf: 'translate3d(0,50px,0)',
     }
   },
   components:{
@@ -68,7 +76,22 @@ export default {
           this.wechatOpcity = 1
           this.wechatTsf = 'translate3d(0,0,0)'
           break;
-      
+        case 2:
+          this.qqOpcity = 1
+          this.qqTsf = 'translate3d(0,0,0)'
+          break;
+        case 3:
+          this.wbOpcity = 1
+          this.wbTsf = 'translate3d(0,0,0)'
+          break;
+        case 4:
+          this.zhOpcity = 1
+          this.zhTsf = 'translate3d(0,0,0)'
+          break;
+        case 5:
+          this.zfbOpcity = 1
+          this.zfbTsf = 'translate3d(0,0,0)'
+          break;
         default:
           break;
       }
@@ -79,7 +102,22 @@ export default {
           this.wechatOpcity = 0
           this.wechatTsf = 'translate3d(0,50px,0)'
           break;
-      
+        case 2:
+          this.qqOpcity = 0
+          this.qqTsf = 'translate3d(0,50px,0)'
+          break;
+        case 3:
+          this.wbOpcity = 0
+          this.wbTsf = 'translate3d(0,50px,0)'
+          break;
+        case 4:
+          this.zhOpcity = 0
+          this.zhTsf = 'translate3d(0,50px,0)'
+          break;
+        case 5:
+          this.zfbOpcity = 0
+          this.zfbTsf = 'translate3d(0,50px,0)'
+          break;
         default:
           break;
       }
@@ -205,8 +243,8 @@ export default {
               transition: .7s all ease;
             }
             .wechat-inner{
-              width: 121px;
-              height: 121px;
+              width: 130px;
+              height: 130px;
               padding: 10px;
               background: #fff;
               top: 40px;
