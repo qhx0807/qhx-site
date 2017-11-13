@@ -16,6 +16,30 @@
         <div class="top-jscb">
           人生本来就没有相欠。别人对你付出，是因为别人欢喜；你对别人付出，是因为自己甘愿。
         </div>
+        <div class="top-social">
+          <ul>
+            <li @mouseover="onMouseOverWechat(1)" @mouseout="onOutWechat(1)">
+              <i class="iconfont icon-weixin"></i>
+              <div class="inner wechat-inner" :style="{opacity: wechatOpcity,transform: wechatTsf}"></div>
+            </li>
+            <li>
+              <i class="iconfont icon-QQ"></i>
+              <div class="inner wechat-inner"></div>
+            </li>
+            <li>
+              <i class="iconfont icon-weibo"></i>
+              <div class="inner wechat-inner"></div>
+            </li>
+            <li>
+              <i class="iconfont icon-zhihu"></i>
+              <div class="inner wechat-inner"></div>
+            </li>
+            <li>
+              <i class="iconfont icon-zhifubao"></i>
+              <div class="inner wechat-inner"></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -26,7 +50,10 @@ import Headermenu from './Header.vue'
 export default {
   name: 'home',
   data() {
-    return {}
+    return {
+      wechatOpcity:0,
+      wechatTsf: 'translate3d(0,50px,0)',
+    }
   },
   components:{
     Headermenu
@@ -34,7 +61,30 @@ export default {
   computed: {},
   created() {},
 
-  methods: {}
+  methods: {
+    onMouseOverWechat(e){
+      switch (e) {
+        case 1:
+          this.wechatOpcity = 1
+          this.wechatTsf = 'translate3d(0,0,0)'
+          break;
+      
+        default:
+          break;
+      }
+    },
+    onOutWechat(e){
+      switch (e) {
+        case 1:
+          this.wechatOpcity = 0
+          this.wechatTsf = 'translate3d(0,50px,0)'
+          break;
+      
+        default:
+          break;
+      }
+    }
+  }
 }
 </script>
 
@@ -48,7 +98,7 @@ export default {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    z-index: -1;
+    //z-index: -1;
     position: relative;
     overflow: hidden;
     .slant-left{
@@ -75,10 +125,11 @@ export default {
       position: relative;
       max-width: 800px;
       padding: 0 10px;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      box-sizing: border-box;
       .top-avatar{
         img{
           width: 80px;
@@ -92,9 +143,9 @@ export default {
         margin: auto;
         font-size: 14px;
         color: #EAEADF;
-        background-color: rgba(0, 0, 0, .66);
+        background-color: rgba(0, 0, 0, .6);
         padding: 20px 30px;
-        margin-top: 30px;
+        margin-top: 25px;
         letter-spacing: 1px;
         line-height: 30px;
         p{
@@ -106,11 +157,65 @@ export default {
         margin: auto;
         font-size: 14px;
         color: #EAEADF;
-        background-color: rgba(0, 0, 0, .66);
+        background-color: rgba(0, 0, 0, .6);
         padding: 20px 30px;
         letter-spacing: 1px;
         line-height: 30px;
         border-top: 1px dashed #f8f8f8;
+      }
+      .top-social{
+        height: 32px;
+        margin-top: 30px;
+        margin-left: 10px;
+        display: inline-block;
+        ul{
+          list-style: none;
+          li{
+            float: left;
+            margin-right: 13px;
+            width: 32px;
+            height: 32px;
+            background-color: #fff;
+            border-radius: 50%;
+            line-height: 32px;
+            text-align: center;
+            position: relative;
+            i{
+              font-size: 16px;
+            }
+            .icon-weixin{
+              color: #51C332;
+            }
+            .icon-QQ{
+              color: #2A9CD5;
+            }
+            .icon-weibo{
+              color: #FF5466;
+            }
+            .icon-zhihu{
+              font-size: 15px;
+              color: #1389E9;
+            }
+            .icon-zhifubao{
+              font-size: 15px;
+              color: #07A0F8;
+            }
+            .inner{
+              position: absolute;
+              transition: .7s all ease;
+            }
+            .wechat-inner{
+              width: 121px;
+              height: 121px;
+              padding: 10px;
+              background: #fff;
+              top: 40px;
+              left: -40px;
+              transform: translate3d(0, 50px, 0);
+              opacity: 0;
+            }
+          }
+        }
       }
     }
     

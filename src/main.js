@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './vuex/store'
+
+import 'iview/dist/styles/iview.css'
 import 'vue2-animate/dist/vue2-animate.min.css'
 
 Vue.config.productionTip = false
