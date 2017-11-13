@@ -4,14 +4,15 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  headerShow: false
+  headerShow: false,
+  headerTop: 0,
 }
 
 export default new Vuex.Store({
   state,
   mutations: {
-    UPDATE_HEADER(state, flag) {
-      state.headerShow = flag
+    UPDATE_HEADER(state, h) {
+      state.headerHeight = h
     }
   }
 })
