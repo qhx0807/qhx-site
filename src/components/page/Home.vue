@@ -20,23 +20,33 @@
           <ul>
             <li @mouseover="onMouseOverWechat(1)" @mouseout="onOutWechat(1)">
               <i class="iconfont icon-weixin"></i>
-              <div class="inner wechat-inner" :style="{opacity: wechatOpcity,transform: wechatTsf}"></div>
+              <div class="inner wechat-inner" :style="{opacity: wechatOpcity,transform: wechatTsf}">
+                <img src="../../assets/wechat.png" alt="">
+              </div>
             </li>
             <li @mouseover="onMouseOverWechat(2)" @mouseout="onOutWechat(2)">
               <i class="iconfont icon-QQ"></i>
-              <div class="inner wechat-inner" :style="{opacity: qqOpcity,transform: qqTsf}"></div>
+              <div class="inner wechat-inner" :style="{opacity: qqOpcity,transform: qqTsf}">
+                <img src="../../assets/qq.jpg" alt="">
+              </div>
             </li>
             <li  @mouseover="onMouseOverWechat(3)" @mouseout="onOutWechat(3)">
               <i class="iconfont icon-weibo"></i>
-              <div class="inner wechat-inner" :style="{opacity: wbOpcity,transform: wbTsf}"></div>
+              <div class="inner wechat-inner" :style="{opacity: wbOpcity,transform: wbTsf}">
+                <img src="../../assets/weibo.png" alt="">
+              </div>
             </li>
             <li @mouseover="onMouseOverWechat(4)" @mouseout="onOutWechat(4)">
               <i class="iconfont icon-zhihu"></i>
-              <div class="inner wechat-inner" :style="{opacity: zhOpcity,transform: zhTsf}"></div>
+              <div class="inner wechat-inner" :style="{opacity: zhOpcity,transform: zhTsf}">
+                <img src="../../assets/zhihu.png" alt="">
+              </div>
             </li>
             <li @mouseover="onMouseOverWechat(5)" @mouseout="onOutWechat(5)">
               <i class="iconfont icon-zhifubao"></i>
-              <div class="inner wechat-inner" :style="{opacity: zfbOpcity,transform: zfbTsf}"></div>
+              <div class="inner wechat-inner" :style="{opacity: zfbOpcity,transform: zfbTsf}">
+                <img src="../../assets/alipay.jpg" alt="">
+              </div>
             </li>
           </ul>
         </div>
@@ -241,6 +251,11 @@ export default {
             .inner{
               position: absolute;
               transition: .7s all ease;
+              padding: 12px;
+              img{
+                width: 100%;
+                height: 100%;
+              }
             }
             .wechat-inner{
               width: 130px;
