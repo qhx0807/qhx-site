@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state,
   mutations: {
     UPDATE_HEADER(state, h) {
-      state.headerHeight = h
+      state.headerTop = h
     }
   }
 })
