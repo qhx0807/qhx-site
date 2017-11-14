@@ -17,7 +17,7 @@ export default {
     this.loop()
   },
   mounted() {
-    //this.bgCanvas()
+    this.scrollWatch()
   },
   methods: {
     randomColor() {
@@ -88,6 +88,31 @@ export default {
 
       reqAniFrame(this.loop)
     },
+    scrollWatch(fn){
+      let t = this
+      document.addEventListener('mousewheel', function(e){
+        if(e.wheelDelta < 0){
+          t.$store.commit('UPDATE_HEADER', -102)
+        }else{
+          t.$store.commit('UPDATE_HEADER', 0)
+        }
+      }, false)
+      
+      // let beforeScrollTop = document.body.scrollTop
+      // window.addEventListener("scroll", function() {
+      //   let afterScrollTop = document.body.scrollTop
+      //   let delta = afterScrollTop - beforeScrollTop
+      //   console.log(beforeScrollTop)
+      //   if( delta === 0 ) return false
+      //   if(delta > 0){
+      //       console.log('down')
+      //   }else{
+      //     console.log('uo')
+      //   }
+      //   beforeScrollTop = afterScrollTop
+      // }, false)
+    },
+    getScrollDirection(){}
   }
 }
 </script>
@@ -120,7 +145,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #35B995;
+    background-color: #A0DAD0;
 }
 ::selection {
     background: #A0DAD0 !important;
