@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -74,7 +75,7 @@ export default {
     }
   },
   components:{
-    Headermenu
+    Headermenu,
   },
   computed: {},
   created() {},

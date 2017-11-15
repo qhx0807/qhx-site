@@ -45,12 +45,14 @@
       </div>
     </div>
     <FooterPage></FooterPage>
+    <BackTop></BackTop>
   </div>
 </template>
 
 <script>
 import Home from './Home'
 import FooterPage from './FooterPage'
+import { BackTop } from 'iview'
 export default {
   name: 'archives',
   data() {
@@ -58,7 +60,8 @@ export default {
   },
   components: {
     Home,
-    FooterPage
+    FooterPage,
+    BackTop
   },
   computed: {},
   created() {},
