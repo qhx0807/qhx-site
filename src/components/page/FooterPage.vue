@@ -7,7 +7,7 @@
       <span> | </span>
       Theme frome <a href="">fuzzz.</a>
       <div><a href="">网站统计</a></div>
-      <div>渝ICP备xxxx</div>
+      <div>820240134@qq.com&nbsp;&nbsp;渝ICP备17007630号-1</div>
     </div>
   </div>
 </template>
