@@ -7,7 +7,7 @@
       <div class="top-info">
         <div class="top-avatar">
           <router-link to="/">
-            <img src="http://img.aktax.cn/wp-content/uploads/2016/09/dashu.jpg" alt="">
+            <img src="../../assets/avatar.jpg" alt="">
           </router-link>
         </div>
         <div class="top-my">
@@ -180,10 +180,10 @@ export default {
       box-sizing: border-box;
       .top-avatar{
         img{
-          width: 80px;
+          width: 94px;
           height: auto;
           border-radius: 50%;
-          border: 3px solid rgba(255, 255, 255, .3);
+          border: 3px solid rgba(255, 255, 255, .7);
         }
       }
       .top-my{
