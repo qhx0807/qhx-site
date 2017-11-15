@@ -10,7 +10,12 @@
         <h1 class="fe-title">聚焦</h1>
         <div class="fe-content">
           <ul>
-            <li>12</li>
+            <li>
+              <img src="../../assets/avatar.jpg" alt="">
+              <div class="fe-lay">
+                <router-link to="/">feature1</router-link>
+              </div>
+            </li>
             <li>12</li>
             <li>12</li>
           </ul>
@@ -144,9 +149,38 @@ export default {
           float: left;
           width: 32.9%;
           height: 160px;
+          position: relative;
+          overflow: hidden;
           border: 1px solid #f8f8f8;
           &:nth-child(2){
             margin: 0 5px;
+          }
+          img{
+            height: 158px;
+            width: 100%;
+            transition: 0.5s all ease;
+            &:hover{
+              transform: scale(1.2); 
+            }
+          }
+          .fe-lay{
+            position: absolute;
+            height: 120px;
+            width: 120px;
+            z-index: 9;
+            top: 50%;
+            margin-top: -60px;
+            left:50%;
+            margin-left: -60px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, .4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+              color:#eee;
+              font-size: 14px;
+            }
           }
         }
       }
