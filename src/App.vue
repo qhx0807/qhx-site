@@ -120,9 +120,9 @@ export default {
 <style leng="less">
 @import url('//at.alicdn.com/t/font_473583_52w68mpoa0n6d2t9.css');
 
-body, a, div, i, img, ul, li {
+/* body, a, div, i, img, ul, li {
     cursor: url(http://www.aktax.cn/Select.cur), default;
-}
+} */
 
 html,
 body {
