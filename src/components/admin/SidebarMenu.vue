@@ -19,29 +19,54 @@ export default {
 			menuList:[
 				{
 					name:'CarList',
-					icon:'android-car',
+					icon:'ios-home-outline',
 					text:'首页',
 				},
 				{
 					name:'Review',
-					icon:'ios-keypad',
-					text:'操作审核',
+					icon:'document',
+					text:'笔记',
 				},
 
 				{
 					name:'Account',
-					icon:'ios-person',
-					text:'账户管理',
+					icon:'ios-pricetag-outline',
+					text:'标签',
+				},
+				{
+					name:'Account',
+					icon:'volume-high',
+					text:'公告',
 				},
 				{
 					name:'Log',
+					icon:'ios-photos-outline',
+					text:'留言板',
+				},
+				{
+					name:'Setting',
+					icon:'images',
+					text:'照片墙',
+				},
+				{
+					name:'Setting',
+					icon:'paper-airplane',
+					text:'发布文章',
+				},
+				{
+					name:'Setting',
 					icon:'ios-calendar',
 					text:'日志查询',
 				},
 				{
 					name:'Setting',
 					icon:'ios-gear',
-					text:'系统设置',
+					text:'网站浏览',
+				},
+				{
+					name:'Setting',
+					icon:'ios-person',
+					text:'账户管理',
 				},
 			],
 			auth:[],
