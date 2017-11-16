@@ -7,6 +7,7 @@ const Tags = resolve => require(['@/components/page/Tags'], resolve)
 const Archives = resolve => require(['@/components/page/Archives'], resolve)
 
 const Login = resolve => require(['@/components/admin/Login'], resolve)
+const Admin = resolve => require(['@/components/admin/Admin'], resolve)
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin
     }
   ]
 })

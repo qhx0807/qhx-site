@@ -5,8 +5,11 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 
-import 'iview/dist/styles/iview.css'
-import 'vue2-animate/dist/vue2-animate.min.css'
+import iView from 'iview'
+import '../theme/index.less'
+//import 'vue2-animate/dist/vue2-animate.min.css'
+
+Vue.use(iView)
 
 Vue.config.productionTip = false
 

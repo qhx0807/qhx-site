@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     onClickLogin(){
-      
+      this.$router.push({name: 'Admin'})
     }
   }
 }
