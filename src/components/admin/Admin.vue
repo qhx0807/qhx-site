@@ -4,7 +4,11 @@
       <SidebarMenu></SidebarMenu>
     </div>
     <div class="admin-content">
-      <div class="con-header"></div> 
+      <div class="con-header">
+        <Button type="text" style="margin-top:6px;" @click="toggleClick">
+          <Icon type="navicon" size="32"></Icon>
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +31,9 @@ export default {
 
   },
   methods: {
+    toggleClick(){
 
+    }
   }
 }
 </script>
@@ -47,6 +53,7 @@ export default {
   }
   .admin-content{
     flex: 1;
+    overflow: auto;
     .con-header{
       height: 60px;
       width: 100%;
