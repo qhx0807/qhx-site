@@ -10,9 +10,9 @@
       </div>
       <div class="header-menu">
         <ul>
-          <li><router-link to="/">Console</router-link></li>
-          <li><router-link to="/">照片</router-link></li>
-          <li><router-link to="/">留言</router-link></li>
+          <li><router-link to="/login">Console</router-link></li>
+          <li><router-link to="/photo">照片</router-link></li>
+          <li><router-link to="/message">留言</router-link></li>
           <li><router-link to="/archives">归档</router-link></li>
           <li><router-link to="/tags">标签</router-link></li>
           <li><router-link to="/">首页</router-link></li>

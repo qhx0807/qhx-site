@@ -6,6 +6,8 @@ const IndexPage = resolve => require(['@/components/page/IndexPage'], resolve)
 const Tags = resolve => require(['@/components/page/Tags'], resolve)
 const Archives = resolve => require(['@/components/page/Archives'], resolve)
 
+const Login = resolve => require(['@/components/admin/Login'], resolve)
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +31,11 @@ export default new Router({
       path: '/header',
       name: 'Header',
       component: Header
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
