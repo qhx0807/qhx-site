@@ -60,7 +60,7 @@ export default {
 				},
 				{
 					name:'Setting',
-					icon:'ios-gear',
+					icon:'stats-bars',
 					text:'网站浏览',
 				},
 				{
