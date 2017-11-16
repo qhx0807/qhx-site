@@ -20,7 +20,7 @@ export default {
 				{
 					name:'CarList',
 					icon:'android-car',
-					text:'车辆列表',
+					text:'首页',
 				},
 				{
 					name:'Review',
