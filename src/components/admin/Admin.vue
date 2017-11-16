@@ -1,7 +1,8 @@
 <template>
   <div class="admin">
     <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto',}">
-      <SidebarMenu></SidebarMenu>
+      <SidebarMenu v-show="!hideMenuText"></SidebarMenu>
+      <SidebarMenuShrink v-show="hideMenuText"></SidebarMenuShrink>
     </div>
     <div class="admin-content">
       <div class="con-header">
@@ -21,18 +22,18 @@ export default {
   data() {
     return {
       hideMenuText: false,
-      hideMenuText: false,
     }
   },
   components: {
-    SidebarMenu
+    SidebarMenu,
+    SidebarMenuShrink
   },
   created() {
 
   },
   methods: {
     toggleClick(){
-
+      this.hideMenuText = !this.hideMenuText
     }
   }
 }
@@ -50,6 +51,7 @@ export default {
   .sidebar-menu-con {
     height: 100%;
     background: rgb(73, 80, 96);
+    transition: all 0.2s ease;
   }
   .admin-content{
     flex: 1;
