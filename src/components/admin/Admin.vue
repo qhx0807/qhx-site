@@ -10,6 +10,16 @@
           <Icon type="navicon" size="32"></Icon>
         </Button>
       </div>
+      <div class="con-wrap">
+        <!-- <Breadcrumb >
+          <BreadcrumbItem>Administrator</BreadcrumbItem>
+          <BreadcrumbItem>控制台</BreadcrumbItem>
+        </Breadcrumb> -->
+        <div class="rw">
+          <router-view></router-view>
+          <Card style="width:350px" :bordered="false"></Card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,7 +31,7 @@ export default {
   name: 'admin',
   data() {
     return {
-      hideMenuText: false,
+      hideMenuText: true,
     }
   },
   components: {
@@ -63,6 +73,12 @@ export default {
       background-color: #fff;
       z-index: 99;
       box-shadow: 0 2px 1px 1px rgba(99, 99, 99, 0.1);
+    }
+    .con-wrap{
+      padding: 70px 10px 0 10px; 
+      .rw{
+        
+      }
     }
   }
 }
