@@ -5,16 +5,19 @@
 </template>
 
 <script>
+import postApi from './axios'
+import axios from 'axios'
 export default {
   name: 'app',
   data() {
     return {
-      hearts: []
+      hearts: [],
     }
   },
   created() {
     this.attachEvent()
     this.loop()
+    this.getUserIp()
   },
   mounted() {
     this.scrollWatch()
@@ -112,7 +115,14 @@ export default {
       //   beforeScrollTop = afterScrollTop
       // }, false)
     },
-    getScrollDirection(){}
+    getUserIp(){
+      // axios.get('http://pv.sohu.com/cityjson').then(function(response){
+      //   console.log(response)
+      // }).catch(function(error){
+      //   console.log(error)
+      // })
+      console.log(returnCitySN)
+    },
   }
 }
 </script>
