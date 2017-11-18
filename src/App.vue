@@ -99,20 +99,6 @@ export default {
           t.$store.commit('UPDATE_HEADER', 0)
         }
       }, false)
-      
-      // let beforeScrollTop = document.body.scrollTop
-      // window.addEventListener("scroll", function() {
-      //   let afterScrollTop = document.body.scrollTop
-      //   let delta = afterScrollTop - beforeScrollTop
-      //   console.log(beforeScrollTop)
-      //   if( delta === 0 ) return false
-      //   if(delta > 0){
-      //       console.log('down')
-      //   }else{
-      //     console.log('uo')
-      //   }
-      //   beforeScrollTop = afterScrollTop
-      // }, false)
     },
     getUserIp(){
       console.log(returnCitySN)
@@ -164,7 +150,6 @@ body {
   line-height: 24px !important;
   height: 100%;
   width: 100%;
-  /* background-color: #f8f8f8; */
 }
 .heart {
   width: 8px;
