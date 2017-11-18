@@ -90,7 +90,7 @@ export default {
 
       reqAniFrame(this.loop)
     },
-    scrollWatch(fn){
+    scrollWatch(){
       let t = this
       document.addEventListener('mousewheel', function(e){
         if(e.wheelDelta < 0){
