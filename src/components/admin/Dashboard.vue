@@ -17,29 +17,79 @@
         <Col span="3">
           <Card>
             <div class="data-wrap">
-              <div class="data-icon">1</div>
-              <div class="data-num">2</div>
+              <div class="data-icon">
+                <Icon type="ios-eye" size="30" color="rgb(100, 213, 114);"></Icon>
+              </div>
+              <div class="data-num">
+                <p>今日浏览量</p>
+                <p>2123</p>
+              </div>
             </div>
           </Card>
         </Col>
         <Col span="3">
           <Card>
-            123
+            <div class="data-wrap">
+              <div class="data-icon">
+                <Icon type="eye" size="30" color="rgb(100, 213, 114);"></Icon>
+              </div>
+              <div class="data-num">
+                <p>历史浏览量</p>
+                <p>2123</p>
+              </div>
+            </div>
           </Card>
         </Col>
         <Col span="3">
           <Card>
-            123
+            <div class="data-wrap">
+              <div class="data-icon">
+                <Icon size="30" type="ios-heart"></Icon>
+              </div>
+              <div class="data-num">
+                <p>点赞</p>
+                <p>2123</p>
+              </div>
+            </div>
           </Card>
         </Col>
         <Col span="3">
           <Card>
-            123
+            <div class="data-wrap">
+              <div class="data-icon">
+                <Icon size="30" type="images"></Icon>
+              </div>
+              <div class="data-num">
+                <p>照片</p>
+                <p>2123</p>
+              </div>
+            </div>
           </Card>
         </Col>
         <Col span="3">
           <Card>
-            123
+            <div class="data-wrap">
+              <div class="data-icon">
+                <Icon size="30" type="ios-cloud"></Icon>
+              </div>
+              <div class="data-num">
+                <p>服务调用</p>
+                <p>2123</p>
+              </div>
+            </div>
+          </Card>
+        </Col>
+        <Col span="3">
+          <Card>
+            <div class="data-wrap">
+              <div class="data-icon">
+                <Icon size="30" type="compose"></Icon>
+              </div>
+              <div class="data-num">
+                <p>笔记</p>
+                <p>2123</p>
+              </div>
+            </div>
           </Card>
         </Col>
     </Row>
@@ -63,12 +113,9 @@ export default {
 }
 </script>
 
-<style lang="less" >
+<style lang="less" scoped>
 .dashboard{
   padding: 6px;
-  .ivu-card-body{
-    padding: 0!important;
-  }
   .ivu-col-span-6{
     padding: 0 6px;
   }
@@ -77,7 +124,6 @@ export default {
   }
   .login-info{
     display: flex;
-    padding: 16px;
     img{
       height: 90px;
       width: 90px;
@@ -97,17 +143,28 @@ export default {
     border-bottom: 1px solid #eee;
   }
   .data-wrap{
-    height: 100px;
+    height: 60px;
     display: flex;
     .data-icon{
-      width: 80px;
-      //background-color: rgb(45, 140, 240);
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-      //color: #fff;
+      width: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .data-num{
       flex: 1;
+      padding-top: 8px;
+      padding-left: 6px;
+      p{
+        height: 20px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.65);
+        &:nth-child(2){
+          font-size: 18px;
+          color: rgba(0, 0, 0, 0.85);
+          font-weight: 500;
+        }
+      }
     }
   }
 }
