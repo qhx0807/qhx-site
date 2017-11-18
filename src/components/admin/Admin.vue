@@ -17,7 +17,6 @@
         </Breadcrumb> -->
         <div class="rw">
           <router-view></router-view>
-          <Card style="width:350px" :bordered="false"></Card>
         </div>
       </div>
     </div>
