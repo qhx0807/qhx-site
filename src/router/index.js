@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 const Header = resolve => require(['@/components/page/Header'], resolve)
 const IndexPage = resolve => require(['@/components/page/IndexPage'], resolve)
 const Tags = resolve => require(['@/components/page/Tags'], resolve)
