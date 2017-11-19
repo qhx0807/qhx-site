@@ -11,6 +11,8 @@ import '../theme/index.less'
 
 Vue.use(iView)
 
+global.API_URL = 'http://localhost:3000'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
