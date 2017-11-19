@@ -2,7 +2,7 @@
   <div class="dashboard">
     <Row>
       <Col span="6">
-      <Card>
+      <Card :bordered="false">
         <div class="login-info">
           <img :src="headImg" alt="">
           <div class="login-name">
@@ -15,7 +15,7 @@
       </Card>
       </Col>
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon type="eye" size="30" color="rgb(100, 213, 114);"></Icon>
@@ -28,7 +28,7 @@
       </Card>
       </Col>
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="arrow-graph-up-right"></Icon>
@@ -41,7 +41,7 @@
       </Card>
       </Col>
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="ios-heart"></Icon>
@@ -54,7 +54,7 @@
       </Card>
       </Col>
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="images"></Icon>
@@ -67,7 +67,7 @@
       </Card>
       </Col>
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="ios-cloud"></Icon>
@@ -80,7 +80,7 @@
       </Card>
       </Col>
       <!-- <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="compose"></Icon>
@@ -93,7 +93,7 @@
       </Card>
       </Col> -->
       <Col span="3">
-      <Card>
+      <Card :bordered="false">
         <div class="data-wrap">
           <div class="data-icon">
             <Icon size="30" type="ios-cloud-upload"></Icon>
