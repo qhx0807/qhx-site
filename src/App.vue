@@ -100,28 +100,18 @@ export default {
           t.$store.commit('UPDATE_HEADER', 0)
         }
       }, false)
-      
-      // let beforeScrollTop = document.body.scrollTop
-      // window.addEventListener("scroll", function() {
-      //   let afterScrollTop = document.body.scrollTop
-      //   let delta = afterScrollTop - beforeScrollTop
-      //   console.log(beforeScrollTop)
-      //   if( delta === 0 ) return false
-      //   if(delta > 0){
-      //       console.log('down')
-      //   }else{
-      //     console.log('uo')
-      //   }
-      //   beforeScrollTop = afterScrollTop
-      // }, false)
     },
     getUserIp(){
-      // axios.get('http://ip.chinaz.com/getip.aspx').then(function(response){
-      //   console.log(response)
-      // }).catch(function(error){
-      //   console.log(error)
-      // })
-      console.log(returnCitySN)
+      axios.get('http://localhost:3000/ip').then(function(response){
+        let str = response.data.Data.split(",")
+        let ip = str[0].split(':')[1].replace(/\'/g, '')
+        let addr = str[1].split(':')[1].replace(/\'/g, '').replace('}', '')
+        // let d = JSON.parse(str)
+        sessionStorage.setItem('ip', ip)
+        sessionStorage.setItem('city', addr)
+      }).catch(function(error){
+        console.log(error)
+      })
     },
   }
 }
@@ -129,11 +119,6 @@ export default {
 
 <style leng="less">
 @import url('//at.alicdn.com/t/font_473583_52w68mpoa0n6d2t9.css');
-
-/* body, a, div, i, img, ul, li {
-    cursor: url(http://www.aktax.cn/Select.cur), default;
-} */
-
 html,
 body {
   padding: 0;

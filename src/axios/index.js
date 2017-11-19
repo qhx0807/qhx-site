@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // const apiUrl = "https://bird.ioliu.cn/v1?url=http://www.kaien.cc/parkingpay.ashx?"
 
-const apiUrl = '../parkingpay.ashx?'
+const apiUrl = 'http://localhost:3000/'
 
 axios.interceptors.request.use(
   function(config) {
@@ -30,14 +30,14 @@ axios.interceptors.response.use(
   }
 )
 
-export const postApi = (data, succ_foo, error_foo) => {
+export const postApi = (router, data, succ_foo, error_foo) => {
   let datastr = ''
   for (let it in data) {
     datastr += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
   }
   axios({
     method: 'get',
-    url: apiUrl + datastr
+    url: apiUrl + router + datastr
   })
     .then(response => {
       succ_foo(response)
