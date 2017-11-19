@@ -18,57 +18,57 @@ export default {
 			iconSize:18,
 			menuList:[
 				{
-					name:'CarList',
+					name:'Dashboard',
 					icon:'ios-home-outline',
 					text:'首页',
 				},
 				{
-					name:'Review',
+					name:'Notes',
 					icon:'document',
 					text:'笔记',
 				},
 
 				{
-					name:'Account',
+					name:'NoteTags',
 					icon:'ios-pricetag-outline',
 					text:'标签',
 				},
 				{
-					name:'Account',
+					name:'Notice',
 					icon:'volume-high',
 					text:'公告',
 				},
 				{
-					name:'Log',
+					name:'Message',
 					icon:'ios-photos-outline',
 					text:'留言板',
 				},
 				{
-					name:'Setting',
+					name:'Photo',
 					icon:'images',
 					text:'照片墙',
 				},
 				{
-					name:'Setting',
+					name:'Publish',
 					icon:'paper-airplane',
 					text:'发布文章',
 				},
 				{
-					name:'Setting',
+					name:'Log',
 					icon:'ios-calendar',
 					text:'日志查询',
 				},
 				{
-					name:'Setting',
+					name:'Pv',
 					icon:'stats-bars',
 					text:'网站浏览',
 				},
 				{
-					name:'Setting',
+					name:'Manager',
 					icon:'ios-person',
 					text:'账户管理',
 				},
-			],
+            ],
 			auth:[],
 			isadmin:null,
 		}
