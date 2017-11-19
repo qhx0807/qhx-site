@@ -6,6 +6,7 @@
 
 <script>
 import postApi from './axios'
+import axios from 'axios'
 export default {
   name: 'app',
   data() {
@@ -90,7 +91,7 @@ export default {
 
       reqAniFrame(this.loop)
     },
-    scrollWatch(){
+    scrollWatch(fn){
       let t = this
       document.addEventListener('mousewheel', function(e){
         if(e.wheelDelta < 0){
@@ -99,8 +100,27 @@ export default {
           t.$store.commit('UPDATE_HEADER', 0)
         }
       }, false)
+      
+      // let beforeScrollTop = document.body.scrollTop
+      // window.addEventListener("scroll", function() {
+      //   let afterScrollTop = document.body.scrollTop
+      //   let delta = afterScrollTop - beforeScrollTop
+      //   console.log(beforeScrollTop)
+      //   if( delta === 0 ) return false
+      //   if(delta > 0){
+      //       console.log('down')
+      //   }else{
+      //     console.log('uo')
+      //   }
+      //   beforeScrollTop = afterScrollTop
+      // }, false)
     },
     getUserIp(){
+      // axios.get('http://ip.chinaz.com/getip.aspx').then(function(response){
+      //   console.log(response)
+      // }).catch(function(error){
+      //   console.log(error)
+      // })
       console.log(returnCitySN)
     },
   }
@@ -150,6 +170,7 @@ body {
   line-height: 24px !important;
   height: 100%;
   width: 100%;
+  /* background-color: #f8f8f8; */
 }
 .heart {
   width: 8px;

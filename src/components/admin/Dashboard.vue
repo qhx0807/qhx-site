@@ -18,7 +18,7 @@
           <Card>
             <div class="data-wrap">
               <div class="data-icon">
-                <Icon type="ios-eye" size="30" color="rgb(100, 213, 114);"></Icon>
+                <Icon type="eye" size="30" color="rgb(100, 213, 114);"></Icon>
               </div>
               <div class="data-num">
                 <p>今日浏览量</p>
@@ -31,7 +31,7 @@
           <Card>
             <div class="data-wrap">
               <div class="data-icon">
-                <Icon type="eye" size="30" color="rgb(100, 213, 114);"></Icon>
+                <Icon size="30" type="arrow-graph-up-right"></Icon>
               </div>
               <div class="data-num">
                 <p>历史浏览量</p>
