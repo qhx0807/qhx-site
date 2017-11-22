@@ -61,15 +61,14 @@ export default {
       }.bind(this))
     },
     updateLoginInfo(id) {
-      axios.post(API_URL + '/userUpdate', {
+      axios.put(API_URL + '/user', {
         id: id,
-        data: {
-          lastLoginTime: new Date().toLocaleString(),
-          ip: sessionStorage.getItem('ip'),
-          location: sessionStorage.getItem('city'),
-        }
+        lastLoginTime: new Date().toLocaleString(),
+        ip: sessionStorage.getItem('ip'),
+        location: sessionStorage.getItem('city'),
       }).then(function(response) {
-        if (response.data.Data.ok){
+        //console.log(response)
+        if (response.data.OK){
           this.$router.push({ name: 'Dashboard' })
         }
         this.isLoading = false
