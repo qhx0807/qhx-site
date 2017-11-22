@@ -3,7 +3,7 @@
     <Spin fix v-if="spinShow"></Spin>
     <Row>
       <Col span="3" v-for="item in tableData" :key="item._id">
-      <Card :bordered="false">
+      <Card @click.native="onClickEditicon(item)" :bordered="false">
         <Icon type="ios-pricetag-outline"></Icon>&nbsp;&nbsp;
         <span class="tag-name">{{item.name}}</span>
       </Card>
@@ -19,14 +19,14 @@
         <span>添加标签 Tags</span>
       </p>
       <div style="padding-right:20px;">
-        <Form :model="formItem" :label-width="50">
+        <Form :model="addData" :label-width="50">
           <FormItem label="NAME">
             <Input v-model="addData.name" placeholder="name"></Input>
           </FormItem>
-           <FormItem label="MEMO">
+          <FormItem label="MEMO">
             <Input v-model="addData.memo" placeholder="name"></Input>
           </FormItem>
-           <FormItem label="URL">
+          <FormItem label="URL">
             <Input v-model="addData.url" placeholder="url"></Input>
           </FormItem>
         </Form>
@@ -34,6 +34,29 @@
       <div slot="footer">
         <Button type="ghost" @click="addModal=false">关闭</Button>
         <Button type="primary" :loading="modal_loading" @click="onClickSaveAdd">保存</Button>
+      </div>
+    </Modal>
+    <Modal v-model="editModal">
+      <p slot="header" style="text-align:center">
+        <span>修改标签 Tags</span>
+      </p>
+      <div style="padding-right:20px;">
+        <Form :model="editData" :label-width="50">
+          <FormItem label="NAME">
+            <Input v-model="editData.name" placeholder="name"></Input>
+          </FormItem>
+          <FormItem label="MEMO">
+            <Input v-model="editData.memo" placeholder="name"></Input>
+          </FormItem>
+          <FormItem label="URL">
+            <Input v-model="editData.url" placeholder="url"></Input>
+          </FormItem>
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button type="ghost" @click="editModal=false">关闭</Button>
+        <Button type="error" @click="delTag" :loading="btnLoading">删除</Button>
+        <Button type="primary" :loading="modal_loading" @click="onClickSaveEdit">保存</Button>
       </div>
     </Modal>
   </div>
@@ -48,12 +71,15 @@ export default {
       tableData: [],
       spinShow: true,
       addModal: false,
+      editModal: false,
       modal_loading: false,
+      btnLoading:false,
       addData: {
         name: '',
         memo: '',
         url: '',
       },
+      editData: {},
     }
   },
   created() {
@@ -70,9 +96,63 @@ export default {
     },
     onClickAddicon() {
       this.addModal = true
+      this.addData = {
+        name: '',
+        memo: '',
+        url: '',
+      }
+    },
+    onClickEditicon(item) {
+      this.editModal = true
+      this.editData = item
+      console.log(item)
     },
     onClickSaveAdd() {
-
+      if (!this.addData.name) {
+        this.$Message.info("tag name is required")
+        return false
+      }
+      this.modal_loading = true
+      axios.post(API_URL + '/tags', this.addData).then(function(response) {
+        if (response.data.OK) {
+          this.addModal = false
+          this.getTagsList()
+        }
+        this.modal_loading = false
+      }.bind(this)).catch(function(error) {
+        this.modal_loading = false
+      }.bind(this))
+    },
+    delTag() {
+      if(!this.editData._id) return false
+      var id = this.editData._id
+      this.btnLoading = true
+      axios.delete(API_URL + '/tags', {id: id}).then(function(response) {
+        if(response.data.OK){
+          this.$Message.info("delete success!")
+          this.editModal = false
+          this.getTagsList()
+        }else{
+          this.$Message.info("error")
+        }
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
+    onClickSaveEdit() {
+      if (!this.editData.name) {
+        this.$Message.info("tag name is required")
+        return false
+      }
+      this.modal_loading = true
+      axios.put(API_URL + '/tags', this.editData).then(function(response) {
+        if (response.data.OK) {
+          this.editModal = false
+          this.getTagsList()
+        }
+        this.modal_loading = false
+      }.bind(this)).catch(function(error) {
+        this.modal_loading = false
+      }.bind(this))
     },
   }
 }
