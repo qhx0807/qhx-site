@@ -73,7 +73,7 @@ export default {
       addModal: false,
       editModal: false,
       modal_loading: false,
-      btnLoading:false,
+      btnLoading: false,
       addData: {
         name: '',
         memo: '',
@@ -124,18 +124,20 @@ export default {
       }.bind(this))
     },
     delTag() {
-      if(!this.editData._id) return false
+      if (!this.editData._id) return false
       var id = this.editData._id
       this.btnLoading = true
-      axios.delete(API_URL + '/tags', {id: id}).then(function(response) {
-        if(response.data.OK){
+      axios.delete(API_URL + '/tags?id=' + id).then(function(response) {
+        if (response.data.OK) {
           this.$Message.info("delete success!")
           this.editModal = false
           this.getTagsList()
-        }else{
+        } else {
           this.$Message.info("error")
         }
+        this.btnLoading = true
       }.bind(this)).catch(function(error) {
+        this.btnLoading = true
       }.bind(this))
     },
     onClickSaveEdit() {
@@ -148,6 +150,7 @@ export default {
         if (response.data.OK) {
           this.editModal = false
           this.getTagsList()
+          this.$Message.info("update success!")
         }
         this.modal_loading = false
       }.bind(this)).catch(function(error) {
