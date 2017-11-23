@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './vuex/store'
-import moment from 'moment'
+
 
 import iView from 'iview'
 import '../theme/index.less'
