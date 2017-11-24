@@ -8,21 +8,23 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var lang = require('highlight.js-async-webpack/src/file.lang.hljs.js');
-var _entry= {
-  back_end: './src/main.js', // 原始入口
-  vue: ['vue'],
-  app: ["babel-polyfill", './src/main.js']
-};
-for (var i = 0; i < lang.length; i++) {
-  _entry[lang[i]] = ['mavon-editor/dist/js/' + lang[i] + '.js']
-}
+// var lang = require('highlight.js-async-webpack/src/file.lang.hljs.js');
+// var _entry= {
+//   back_end: './src/main.js', // 原始入口
+//   vue: ['vue'],
+//   app: ["babel-polyfill", './src/main.js']
+// };
+// for (var i = 0; i < lang.length; i++) {
+//   _entry[lang[i]] = ['mavon-editor/dist/js/' + lang[i] + '.js']
+// }
 
 module.exports = {
-  entry: _entry,
+  entry: {
+    app: './src/main.js'
+  },
   output: {
     path: config.build.assetsRoot,
-    filename: 'js/[name].js',
+    filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
