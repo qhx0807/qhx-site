@@ -8,7 +8,7 @@
             </Input>
           </FormItem>
         </Form>
-        <mavon-editor :ishljs="true" @change="onInputMd" :value="publishObj.mdValue" code-style="code-hybrid" style="height: 700px"></mavon-editor>
+        <mavon-editor :ishljs="true" @change="onInputMd" :value="publishObj.mdValue" code-style="code-hybrid" style="height: 800px"></mavon-editor>
       </Col>
       <Col span="5" style="padding-left:10px;">
       <Card :bordered="false">
