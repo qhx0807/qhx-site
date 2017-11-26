@@ -4,7 +4,7 @@
     <Card :bordered="false">
       <Table :columns="tableColumns" :data="tableData"></Table>
       <div class="page">
-        <Page :total="total" :current="currentPage" @on-change="changePage"></Page>
+        <Page show-total :total="total" :current="currentPage" @on-change="changePage"></Page>
       </div>
       <div style="clear:both;"></div>
     </Card>

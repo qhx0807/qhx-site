@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import postApi from './axios'
 import axios from 'axios'
+import moment from 'moment'
 export default {
   name: 'app',
   data() {
@@ -109,10 +109,23 @@ export default {
         // let d = JSON.parse(str)
         sessionStorage.setItem('ip', ip)
         sessionStorage.setItem('city', addr)
-      }).catch(function(error){
+        this.addPvRecord(ip, addr)
+      }.bind(this)).catch(function(error){
         console.log(error)
-      })
+      }.bind(this))
     },
+    addPvRecord(ip, addr){
+      let pvData = {
+        time: moment().format().replace('T', ' ').substring(0,19),
+        ip: ip,
+        location: addr,
+      }
+      axios.post(API_URL + '/pv', pvData).then(function(response) {
+        if (response.data.OK) {
+        }
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    }
   }
 }
 </script>
