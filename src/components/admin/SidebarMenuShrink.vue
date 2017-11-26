@@ -28,11 +28,15 @@ export default {
 					icon:'document',
 					text:'笔记',
 				},
-
 				{
 					name:'NoteTags',
 					icon:'ios-pricetag-outline',
 					text:'标签',
+				},
+				{
+					name:'Archive',
+					icon:'ios-folder-outline',
+					text:'归档',
 				},
 				{
 					name:'Notice',
