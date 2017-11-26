@@ -17,7 +17,7 @@ const Publish = resolve => require(['@/components/admin/Publish'], resolve)
 const Log = resolve => require(['@/components/admin/Log'], resolve)
 const Pv = resolve => require(['@/components/admin/Pv'], resolve)
 const Manager = resolve => require(['@/components/admin/Manager'], resolve)
-const Archive = resolve => require(['@/components/admin/Archive'], resolve)
+const Archive = resolve => require(['@/components/admin/Archives'], resolve)
 
 Vue.use(Router)
 

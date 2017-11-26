@@ -13,11 +13,31 @@
       <Col span="5" style="padding-left:10px;">
       <Card :bordered="false">
         <p slot="title">
+          <Icon type="image"></Icon>
+          图片
+        </p>
+        <div class="head-img">
+          
+        </div>
+      </Card>
+      <Card :bordered="false" style="margin-top:12px;">
+        <p slot="title">
           <Icon type="ios-pricetags-outline"></Icon>
           标签
         </p>
         <div>
           html
+        </div>
+      </Card>
+      <Card :bordered="false" style="margin-top:12px;">
+        <p slot="title">
+          <Icon type="ios-folder-outline"></Icon>
+          归档
+        </p>
+        <div>
+          <Select v-model="archive">
+              <Option v-for="item in archData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          </Select>
         </div>
       </Card>
       </Col>
@@ -36,6 +56,8 @@ export default {
       htmlCode: '',
       formInline:{},
       ruleInline:{},
+      archive:'',
+      archData:[],
     }
   },
   components: {
@@ -58,6 +80,9 @@ export default {
   height: 580px;
   .v-note-wrapper {
     z-index: 99;
+  }
+  .head-img{
+    height: 100px;
   }
 }
 </style>
