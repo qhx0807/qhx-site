@@ -35,7 +35,7 @@ export default {
       value: '',
       htmlCode: '',
       formInline:{},
-      ruleInline:[],
+      ruleInline:{},
     }
   },
   components: {

@@ -86,7 +86,7 @@ export default {
   methods: {
     getList() {
       axios.get(API_URL + '/notice').then(function(response) {
-        console.log(response)
+        //console.log(response)
         this.list = response.data.Data
         this.spinShow = false
       }.bind(this)).catch(function(error) {
