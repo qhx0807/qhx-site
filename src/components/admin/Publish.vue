@@ -26,7 +26,7 @@
           标签
         </p>
         <div>
-          <span class="tag-span" @click="onSlectTags(item.name, index)" :class="{aactive:isSelect[index]}" v-for="(item, index) in tagsData" :key="item._id">{{item.name}}</span>
+          <span class="tag-span" @click="onSlectTags(item.name, index)"  v-for="(item, index) in tagsData" :class="{active : isSelect[index]}" :key="item._id">{{item.name}}</span>
         </div>
       </Card>
       <Card :bordered="false" style="margin-top:12px;">
@@ -81,7 +81,7 @@ export default {
         watch: 0,
         commits:[],
       },
-      isSelect:[],
+      isSelect: null,
     }
   },
   components: {
@@ -100,6 +100,7 @@ export default {
       axios.get(API_URL + '/tags').then(function(response) {
         this.tagsData = response.data.Data
         this.spinShow = false
+        this.isSelect = new Array(response.data.Data.length).fill(false)
       }.bind(this)).catch(function(error) {
         this.spinShow = false
       }.bind(this))
@@ -117,8 +118,7 @@ export default {
       console.log(this.publishObj)
     },
     onSlectTags(name,index){
-      alert(index)
-      this.isSelect[index] = true
+      this.isSelect[index] = !this.isSelect[index]
       console.log(this.isSelect)
     },
   }
@@ -140,8 +140,10 @@ export default {
     border: 1px solid #eee;
     margin-right: 8px;
     cursor: pointer;
+    display: inline-block;
+    margin-bottom: 6px;
     &.active{
-      border: px solid #444;
+      border: 1px solid #444;
     }
   }
 }
