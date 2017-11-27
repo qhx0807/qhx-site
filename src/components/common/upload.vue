@@ -23,6 +23,7 @@ export default {
   methods: {
     upload(event) {
       let file = event.target.files[0]
+      console.log(file)
       const self = this
       const flag = this.flag
       if (file) {
@@ -31,6 +32,7 @@ export default {
         axios.get(API_URL + '/qiniuToken').then(function(response) {
           console.log(response)
           formData.append('token', response.data.Data)
+          formData.append('key', file.name)
           var token = response.data.Data
             axios({
               url:'http://upload-z2.qiniup.com',
@@ -45,7 +47,13 @@ export default {
                 self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
               },
             }).then(function(qiniu){
-              console.log(qiniu)
+              let result = qiniu.data
+              if (result.hash && result.key) {
+                self.$emit('complete', 200 , result, flag)
+                event.target.value = null
+              } else {
+                self.$emit('complete', 500, result, flag)
+              }
             }).catch(function(err){
               console.log(err)
             })
