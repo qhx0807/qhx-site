@@ -17,7 +17,9 @@
           图片
         </p>
         <div class="head-img">
-          
+          <hi-upload @complete="uploadComplete" @progress="uploadProgress">
+            <a>选择图片</a>
+          </hi-upload>
         </div>
       </Card>
       <Card :bordered="false" style="margin-top:12px;">
@@ -58,6 +60,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import { mavonEditor } from 'mavon-editor'
+import HiUpload from '../common/upload'
 import 'mavon-editor/dist/css/index.css'
 export default {
   name: 'publish',
@@ -82,11 +85,12 @@ export default {
         commits: [],
         tags: []
       },
-      isSelect: []
+      isSelect: [],
     }
   },
   components: {
-    mavonEditor
+    mavonEditor,
+    HiUpload
   },
   created() {
     this.getTagsList()
@@ -145,7 +149,13 @@ export default {
     },
     onSlectTags(name, index) {
       this.$set(this.isSelect, index, !this.isSelect[index])
-    }
+    },
+    uploadComplete(){
+
+    },
+    uploadProgress(){
+
+    },
   }
 }
 </script>
