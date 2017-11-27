@@ -29,20 +29,21 @@ export default {
         const formData = new FormData()
         formData.append('file', file)
         axios.get(API_URL + '/qiniuToken').then(function(response) {
-          console.log(response.Data)
-          formData.append('token', response.Data)
+          console.log(response)
+          formData.append('token', response.data.Data)
+          var token = response.data.Data
             axios({
               url:'http://upload-z2.qiniup.com',
               method:'POST',
               headers:{
                 'Content-Type':'multipart/form-data',
-                Authorization: `UpToken ${response.Data}`
+                Authorization: `UpToken ${token}`
               },
               data:formData,
-              // onUploadProgress:function(progressEvent){
-              //   console.log(progressEvent)
-              //   self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
-              // },
+              onUploadProgress:function(progressEvent){
+                console.log(progressEvent)
+                self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
+              },
             }).then(function(qiniu){
               console.log(qiniu)
             }).catch(function(err){
