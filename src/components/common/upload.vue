@@ -33,13 +33,16 @@ export default {
           formData.append('token', response.Data)
             axios({
               url:'http://upload-z2.qiniup.com',
-              method:'post',
-              onUploadProgress:function(progressEvent){
-                console.log(progressEvent)
-                self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
+              method:'POST',
+              headers:{
+                'Content-Type':'multipart/form-data',
+                Authorization: `UpToken ${response.Data}`
               },
-              headers:{'Content-Type':'multipart/form-data'},
               data:formData,
+              // onUploadProgress:function(progressEvent){
+              //   console.log(progressEvent)
+              //   self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
+              // },
             }).then(function(qiniu){
               console.log(qiniu)
             }).catch(function(err){
