@@ -8,7 +8,7 @@
           <div class="login-name">
             <h2>{{name}}</h2>
             <p>{{role}}</p>
-            <p>上次登录时间： {{lastLoginTime}}</p>
+            <p>上次： {{lastLoginTime}}</p>
             <p>{{lastLoginCity}}&nbsp;&nbsp; {{lastLoginIp}} </p>
           </div>
         </div>
@@ -126,6 +126,7 @@ export default {
     this.name = sessionStorage.name
     this.role = sessionStorage.role
     this.lastLoginTime = sessionStorage.lastLoginTime
+    //alert(sessionStorage.lastLoginTime)
     this.lastLoginCity = sessionStorage.lastLoginCity
     this.lastLoginIp = sessionStorage.lastLoginIp
     this.headImg = sessionStorage.headImg
@@ -154,7 +155,7 @@ export default {
     .login-name {
       padding-left: 30px;
       flex: 1;
-      padding-top: 20px;
+      padding-top: 4px;
       text-transform: capitalize;
       h2 {
         font-size: 22px;

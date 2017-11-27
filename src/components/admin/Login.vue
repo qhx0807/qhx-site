@@ -67,7 +67,7 @@ export default {
         ip: sessionStorage.getItem('ip'),
         location: sessionStorage.getItem('city'),
       }).then(function(response) {
-        //console.log(response)
+        console.log(response)
         if (response.data.OK){
           this.$router.push({ name: 'Dashboard' })
         }

@@ -103,12 +103,14 @@ export default {
     },
     getUserIp(){
       axios.get('http://localhost:3000/ip').then(function(response){
+        
         let str = response.data.Data.split(",")
         let ip = str[0].split(':')[1].replace(/\'/g, '')
         let addr = str[1].split(':')[1].replace(/\'/g, '').replace('}', '')
         // let d = JSON.parse(str)
         sessionStorage.setItem('ip', ip)
         sessionStorage.setItem('city', addr)
+        
         this.addPvRecord(ip, addr)
       }.bind(this)).catch(function(error){
         console.log(error)

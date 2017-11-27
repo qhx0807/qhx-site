@@ -8,7 +8,7 @@
             </Input>
           </FormItem>
         </Form>
-        <mavon-editor :ishljs="true" @change="onInputMd" :value="publishObj.mdValue" code-style="code-hybrid" style="height: 800px"></mavon-editor>
+        <mavon-editor :ishljs="true" @change="onInputMd" :value="publishObj.mdValue" code-style="code-hybrid" style="height: 600px"></mavon-editor>
       </Col>
       <Col span="5" style="padding-left:10px;">
       <Card :bordered="false">
@@ -26,7 +26,7 @@
           标签
         </p>
         <div>
-          <span class="tag-span" @click="onSlectTags(item.name, index)"  v-for="(item, index) in tagsData" :class="{active : isSelect[index]}" :key="item._id">{{item.name}}</span>
+          <span class="tag-span" @click="onSlectTags(item.name, index)"  v-for="(item, index) in tagsData" :class="{active:isSelect[index]}" :key="item._id">{{item.name}}</span>
         </div>
       </Card>
       <Card :bordered="false" style="margin-top:12px;">
@@ -65,23 +65,24 @@ export default {
     return {
       value: '',
       htmlCode: '',
-      formInline:{},
-      ruleInline:{},
-      archData:[],
-      tagsData:[],
-      publishObj:{
-        archive:'',
-        title:'',
-        htmlvalue:'',
-        mdValue:'',
-        date:'',
-        titleImg:'',
+      formInline: {},
+      ruleInline: {},
+      archData: [],
+      tagsData: [],
+      publishObj: {
+        archive: '',
+        title: '',
+        htmlvalue: '',
+        mdValue: '',
+        date: '',
+        titleImg: '',
         auth: sessionStorage.name,
         like: 0,
         watch: 0,
-        commits:[],
+        commits: [],
+        tags: []
       },
-      isSelect: null,
+      isSelect: []
     }
   },
   components: {
@@ -91,36 +92,60 @@ export default {
     this.getTagsList()
     this.getArchList()
   },
+  computed: {},
   methods: {
     onInputMd(val, render) {
       this.publishObj.htmlvalue = render
       this.publishObj.mdValue = val
     },
     getTagsList() {
-      axios.get(API_URL + '/tags').then(function(response) {
-        this.tagsData = response.data.Data
-        this.spinShow = false
-        this.isSelect = new Array(response.data.Data.length).fill(false)
-      }.bind(this)).catch(function(error) {
-        this.spinShow = false
-      }.bind(this))
+      axios
+        .get(API_URL + '/tags')
+        .then(
+          function(response) {
+            this.tagsData = response.data.Data
+            this.spinShow = false
+            this.isSelect = new Array(response.data.Data.length).fill(false)
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            this.spinShow = false
+          }.bind(this)
+        )
     },
     getArchList() {
-      axios.get(API_URL + '/archive').then(function(response) {
-        this.archData = response.data.Data
-        this.spinShow = false
-      }.bind(this)).catch(function(error) {
-        this.spinShow = false
-      }.bind(this))
+      axios
+        .get(API_URL + '/archive')
+        .then(
+          function(response) {
+            this.archData = response.data.Data
+            this.spinShow = false
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            this.spinShow = false
+          }.bind(this)
+        )
     },
-    publishAction(){
-      this.publishObj.date = moment().format().replace('T', ' ').substring(0,19)
+    publishAction() {
+      this.isSelect.forEach(
+        function(item, index) {
+          if (item) {
+            this.publishObj.tags.push(this.tagsData[index].name)
+          }
+        }.bind(this)
+      )
+      this.publishObj.date = moment()
+        .format()
+        .replace('T', ' ')
+        .substring(0, 19)
       console.log(this.publishObj)
     },
-    onSlectTags(name,index){
-      this.isSelect[index] = !this.isSelect[index]
-      console.log(this.isSelect)
-    },
+    onSlectTags(name, index) {
+      this.$set(this.isSelect, index, !this.isSelect[index])
+    }
   }
 }
 </script>
@@ -132,17 +157,17 @@ export default {
   .v-note-wrapper {
     z-index: 99;
   }
-  .head-img{
+  .head-img {
     height: 100px;
   }
-  .tag-span{
+  .tag-span {
     padding: 4px 8px;
     border: 1px solid #eee;
     margin-right: 8px;
     cursor: pointer;
     display: inline-block;
     margin-bottom: 6px;
-    &.active{
+    &.active {
       border: 1px solid #444;
     }
   }
