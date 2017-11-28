@@ -163,7 +163,22 @@ export default {
       
     },
     onClickDel(doc){
-
+      this.$Modal.confirm({
+        title:'Confirm',
+        content:'delete this note',
+        onOk:()=>{
+          axios.delete(API_URL + '/notes?id=' + doc._id).then(function(response) {
+            if (response.data.OK) {
+              this.$Message.info("delete success!")
+              this.getList()
+            } else {
+              this.$Message.info("error")
+            }
+          }.bind(this)).catch(function(error) {
+            
+          }.bind(this))
+        },
+      })
     },
   }
 }
