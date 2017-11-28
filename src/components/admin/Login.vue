@@ -55,8 +55,10 @@ export default {
         } else {
           this.$Message.info('用户名或密码错误！')
         }
+        this.isLoading = false
       }.bind(this)).catch(function(error) {
         console.log(error)
+        this.isLoading = false
         this.$Message.info('用户名或密码错误！')
       }.bind(this))
     },
