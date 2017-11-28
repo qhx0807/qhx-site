@@ -34,6 +34,7 @@ export default {
           formData.append('token', response.data.Data)
           formData.append('key', file.name)
           var token = response.data.Data
+          self.$emit('beforeUpload',flag)
             axios({
               url:'http://upload-z2.qiniup.com',
               method:'POST',
@@ -43,7 +44,6 @@ export default {
               },
               data:formData,
               onUploadProgress:function(progressEvent){
-                console.log(progressEvent)
                 self.$emit('progress', parseFloat(progressEvent.loaded / progressEvent.total * 100),flag)
               },
             }).then(function(qiniu){
