@@ -3,9 +3,11 @@
     <Row>
       <Col span="19">
         <Form ref="formInline" :model="publishObj" :rules="ruleInline">
-          <FormItem prop="" label="文章标题" :label-width="80">
-            <Input type="text" v-model="publishObj.title">
-            </Input>
+          <FormItem prop="title" label="文章标题" style="margin-bottom:10px" :label-width="80">
+            <Input type="text" v-model="publishObj.title"></Input>
+          </FormItem>
+          <FormItem prop="titleImg" label="标题图" style="margin-bottom:10px" :label-width="80">
+            <Input type="text" v-model="publishObj.titleImg"></Input>
           </FormItem>
         </Form>
         <mavon-editor :ishljs="true" @change="onInputMd" :value="publishObj.mdValue" code-style="code-hybrid" style="height: 600px"></mavon-editor>
@@ -17,8 +19,10 @@
           图片
         </p>
         <div class="head-img">
-          <hi-upload @complete="uploadComplete" @progress="uploadProgress">
+          <img :src="publishObj.titleImg" alt="">
+          <hi-upload @complete="uploadComplete" @beforeUpload="onUploadBefore" flag="titleImg" @progress="uploadProgress">
             <a>选择图片</a>
+            <span>{{progress.toFixed(2)}}%</span>
           </hi-upload>
         </div>
       </Card>
@@ -48,7 +52,21 @@
           动作
         </p>
         <div>
-          <Button type="primary" @click="publishAction">发布文章</Button>
+          <hi-upload @complete="uploadComplete" @beforeUpload="onUploadBefore" @progress="uploadProgress">
+            <a>选择图片</a>
+             <span>{{progress.toFixed(2)}}%</span>
+          </hi-upload>
+          <Button style="margin-left:10px" type="primary" :loading="submitLoading" @click="publishAction">发布文章</Button>
+        </div>
+      </Card>
+      <Card :bordered="false" style="margin-top:12px;">
+        <p slot="title">http://os70o8m36.bkt.clouddn.com/</p>
+        <div>
+          <ul>
+            <li v-for="item in upLoadImgData" :key="item.hash">
+              {{item.key}}
+            </li>
+          </ul>
         </div>
       </Card>
       </Col>
@@ -68,24 +86,26 @@ export default {
     return {
       value: '',
       htmlCode: '',
-      formInline: {},
       ruleInline: {},
       archData: [],
       tagsData: [],
+      submitLoading:false,
       publishObj: {
-        archive: '',
-        title: '',
-        htmlvalue: '',
-        mdValue: '',
-        date: '',
-        titleImg: '',
+        title: "",
+        titleImg: "",
+        archive: "",
         auth: sessionStorage.name,
+        date: "",
+        htmlvalue: "",
+        mdValue: "",
         like: 0,
         watch: 0,
         commits: [],
-        tags: []
+        tags: [],
       },
       isSelect: [],
+      upLoadImgData:[],
+      progress:0,
     }
   },
   components: {
@@ -103,9 +123,7 @@ export default {
       this.publishObj.mdValue = val
     },
     getTagsList() {
-      axios
-        .get(API_URL + '/tags')
-        .then(
+      axios.get(API_URL + '/tags').then(
           function(response) {
             this.tagsData = response.data.Data
             this.spinShow = false
@@ -141,20 +159,77 @@ export default {
           }
         }.bind(this)
       )
+      if(this.publishObj.title==''){
+        this.$Message.info("title is required")
+        return false
+      }else if(this.publishObj.titleImg==''){
+        this.$Message.info("titleImg is required")
+        return false
+      }else if(this.publishObj.mdValue==''){
+        this.$Message.info("mdValue is required")
+        return false
+      }else if(this.publishObj.archive==''){
+        this.$Message.info("archive is required")
+        return false
+      }else if(this.publishObj.tags.length==0){
+        this.$Message.info("tags is required")
+        return false
+      }
+      this.submitLoading = true
       this.publishObj.date = moment()
         .format()
         .replace('T', ' ')
         .substring(0, 19)
-      console.log(this.publishObj)
+      //console.log(this.publishObj)
+      axios.post(API_URL + '/notes', this.publishObj).then(
+        function(response) {
+          if(response.data.OK){
+            this.$Message.info('publish success')
+            this.$Notice.success({
+              title: 'Publish success',
+              desc: '发布成功',
+              duration: 0
+            })
+          }else{
+            this.$Message.info(response.data.Data)
+          }
+          this.submitLoading = false
+        }.bind(this)).catch(
+        function(error) {
+          this.submitLoading = false
+        }.bind(this))
     },
     onSlectTags(name, index) {
       this.$set(this.isSelect, index, !this.isSelect[index])
     },
-    uploadComplete(){
-
+    uploadComplete(state, result, flag){
+      this.progress = 0
+      this.$Loading.finish()
+      if(state==200){
+        this.upLoadImgData.push(result)
+        this.$Notice.open({
+          name:'complete',
+          title: '[qiniu]上传成功！',
+          desc: 'http://os70o8m36.bkt.clouddn.com/'+result.key,
+          duration: 0
+        })
+        if(flag=='titleImg'){
+          this.publishObj.titleImg = 'http://os70o8m36.bkt.clouddn.com/'+result.key
+        }
+      }else{
+        this.$Loading.error()
+        this.$Message.info(state)
+      }
     },
-    uploadProgress(){
-
+    onUploadBefore(flag){
+      this.$Loading.start()
+      this.progress = 0
+    },
+    uploadProgress(progress){
+      this.progress = progress
+      if(progress==100){
+        this.$Notice.close('progress')
+      }
     },
   }
 }
@@ -169,6 +244,10 @@ export default {
   }
   .head-img {
     height: 100px;
+    img{
+      height: 90px;
+      vertical-align: middle;
+    }
   }
   .tag-span {
     padding: 4px 8px;
