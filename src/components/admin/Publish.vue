@@ -33,6 +33,13 @@
         </p>
         <div>
           <span class="tag-span" @click="onSlectTags(item.name, index)"  v-for="(item, index) in tagsData" :class="{active:isSelect[index]}" :key="item._id">{{item.name}}</span>
+          <span class="tag-span add" @click="onClickAddTag">+</span>
+          <Row v-show="addShow">
+            <Col span="24">
+              <Input style="width:200px" type="text" v-model="addData.name"></Input>
+              <Button type="ghost" @click="addTag" :loading="modal_loading">ADD</Button>
+            </Col>
+          </Row>
         </div>
       </Card>
       <Card :bordered="false" style="margin-top:12px;">
@@ -90,6 +97,8 @@ export default {
       archData: [],
       tagsData: [],
       submitLoading:false,
+      modal_loading:false,
+      addShow:false,
       publishObj: {
         title: "",
         titleImg: "",
@@ -106,6 +115,11 @@ export default {
       isSelect: [],
       upLoadImgData:[],
       progress:0,
+      addData: {
+        name: '',
+        memo: '',
+        url: '',
+      },
     }
   },
   components: {
@@ -231,6 +245,26 @@ export default {
         this.$Notice.close('progress')
       }
     },
+    onClickAddTag(){
+      this.addShow = !this.addShow
+    },
+    addTag(){
+      if(this.addData.name == ''){
+        this.$Message.info("tag's name is required")
+        return false
+      }
+      this.modal_loading = true
+      axios.post(API_URL + '/tags', this.addData).then(function(response) {
+        if (response.data.OK) {
+          this.getTagsList()
+          this.addData.name = ''
+          this.addShow = false
+        }
+        this.modal_loading = false
+      }.bind(this)).catch(function(error) {
+        this.modal_loading = false
+      }.bind(this))
+    }
   }
 }
 </script>
@@ -258,6 +292,10 @@ export default {
     margin-bottom: 6px;
     &.active {
       border: 1px solid #444;
+    }
+    &.add{
+      width: 35px;
+      text-align: center;
     }
   }
 }
