@@ -11,10 +11,10 @@
           </router-link>
         </div>
         <div class="top-my">
-          <p>Carpe Diem and Do what I like</p>
+          <p>{{dailyObj.note}}</p>
         </div>
         <div class="top-jscb">
-          人生本来就没有相欠。别人对你付出，是因为别人欢喜；你对别人付出，是因为自己甘愿。
+          {{dailyObj.content}}
         </div>
         <div class="top-social">
           <ul>
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Headermenu from './Header.vue'
 export default {
   name: 'home',
@@ -72,13 +73,16 @@ export default {
       zhTsf: 'translate3d(0,50px,0)',
       zfbOpcity:0,
       zfbTsf: 'translate3d(0,50px,0)',
+      dailyObj:{},
     }
   },
   components:{
     Headermenu,
   },
   computed: {},
-  created() {},
+  created() {
+    this.getEveryDay()
+  },
 
   methods: {
     onMouseOverWechat(e){
@@ -132,7 +136,13 @@ export default {
         default:
           break;
       }
-    }
+    },
+    getEveryDay(){
+      axios.get(API_URL + '/daily').then(function(response) {
+        this.dailyObj = JSON.parse(response.data.Data)
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
   }
 }
 </script>
