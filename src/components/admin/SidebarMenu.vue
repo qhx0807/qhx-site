@@ -72,6 +72,11 @@ export default {
 					icon:'ios-person',
 					text:'账户管理',
 				},
+				{
+					name:'Qiniu',
+					icon:'ios-cloud-outline',
+					text:'七牛对象存储',
+				},
             ],
 			auth:[],
 			isadmin:null,
