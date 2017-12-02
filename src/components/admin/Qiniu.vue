@@ -1,15 +1,16 @@
 <template>
-  <div>
+  <div class="qiniu">
+    <Spin fix v-if="spinShow"></Spin>
     <!-- Root element of PhotoSwipe. Must have class pswp. -->
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
       <!-- Background of PhotoSwipe. 
-                     It's a separate element as animating opacity is faster than rgba(). -->
+                       It's a separate element as animating opacity is faster than rgba(). -->
       <div class="pswp__bg"></div>
       <!-- Slides wrapper with overflow:hidden. -->
       <div class="pswp__scroll-wrap">
         <!-- Container that holds slides. 
-                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                          PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                          Don't modify these 3 pswp__item elements, data is added later on. -->
         <div class="pswp__container">
           <div class="pswp__item"></div>
           <div class="pswp__item"></div>
@@ -56,10 +57,12 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe'
 import UI from 'photoswipe/dist/photoswipe-ui-default'
+import axios from 'axios'
 export default {
   name: 'qiniu',
   data() {
     return {
+      spinShow:false,
       photoOption: {
         index: 0,
         items: [
@@ -78,10 +81,16 @@ export default {
           }
         ]
       },
+      list:[],
+      qiniuData:{
+        accessKey:'_iCkoUSbXhnN8AF8T8Mi1qBr-6z47dk-0iQs0C_r',
+        secretKey:'c7raaxbjXxadIaSU4PfSuMJMw1ICaoJuEjqXoW4-',
+        bucket:'qhx-store-2',
+      },
     }
   },
   created() {
-
+    this.getImgList()
   },
   mounted() {
     //this.openPhotoSwipe()
@@ -99,10 +108,22 @@ export default {
       let gallery = new PhotoSwipe(pswpElement, UI, this.photoOption.items, options)
       gallery.init()
     },
+    getImgList() {
+      axios.post(API_URL + '/imageList', this.qiniuData).then(function(response) {
+        console.log(response)
+        this.list = response.data.Data
+        this.spinShow = false
+      }.bind(this)).catch(function(error) {
+        this.spinShow = false
+      }.bind(this))
+    },
   }
 }
 </script>
 
 <style lang="less" scoped>
-
+.qiniu{
+  padding: 6px;
+  position: relative;
+}
 </style>
