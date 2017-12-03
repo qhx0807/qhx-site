@@ -48,7 +48,23 @@
         </div>
       </div>
     </div>
-    <Button @click="openPhotoSwipe" type="primary">photoswipe</Button>
+    <!-- <Row>
+      <Col span="2" v-for="(item, index) in list" :key="index">
+        <img src="" alt="">
+      </Col>
+    </Row> -->
+    <waterfall :line-gap="200" :watch="list">
+      <waterfall-slot
+        v-for="(item, index) in list"
+        :width="100"
+        :height="100"
+        :order="index"
+        :key="item.index"
+      >
+        <img @click="openPhotoSwipe(index)" class="water-img" :src="'http://os70o8m36.bkt.clouddn.com/'+item.key" >
+      </waterfall-slot>
+    </waterfall>
+    <!-- <Button @click="openPhotoSwipe" type="primary">photoswipe</Button> -->
   </div>
 </template>
 
@@ -57,6 +73,8 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe'
 import UI from 'photoswipe/dist/photoswipe-ui-default'
+import Waterfall from 'vue-waterfall/lib/waterfall'
+import WaterfallSlot from 'vue-waterfall/lib/waterfall-slot'
 import axios from 'axios'
 export default {
   name: 'qiniu',
@@ -65,21 +83,7 @@ export default {
       spinShow:false,
       photoOption: {
         index: 0,
-        items: [
-          {
-            src: 'https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg',
-            title: 'Image Caption',
-            w: 964,
-            h: 1024,
-
-          },
-          {
-            src: 'https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg',
-            title: 'Image Caption',
-            w: 964,
-            h: 1024
-          }
-        ]
+        items: []
       },
       list:[],
       qiniuData:{
@@ -87,7 +91,12 @@ export default {
         secretKey:'c7raaxbjXxadIaSU4PfSuMJMw1ICaoJuEjqXoW4-',
         bucket:'qhx-store-2',
       },
+      host:'http://os70o8m36.bkt.clouddn.com/',
     }
+  },
+  components: {
+    Waterfall,
+    WaterfallSlot
   },
   created() {
     this.getImgList()
@@ -96,10 +105,10 @@ export default {
     //this.openPhotoSwipe()
   },
   methods: {
-    openPhotoSwipe() {
+    openPhotoSwipe(index) {
       let pswpElement = document.querySelectorAll('.pswp')[0]
       let options = {
-        index: this.photoOption.index,
+        index: index,
         history: false,
         focus: true,
         showAnimationDuration: 0,
@@ -111,7 +120,15 @@ export default {
     getImgList() {
       axios.post(API_URL + '/imageList', this.qiniuData).then(function(response) {
         console.log(response)
-        this.list = response.data.Data
+        this.list = response.data.Data.items
+        response.data.Data.items.forEach(function(item){
+          this.photoOption.items.push({
+            src:'http://os70o8m36.bkt.clouddn.com/'+item.key,
+            title:item.key+' '+item.fsize+' '+item.putTime,
+            w: 964,
+            h: 1024,
+          })
+        }.bind(this))
         this.spinShow = false
       }.bind(this)).catch(function(error) {
         this.spinShow = false
@@ -125,5 +142,9 @@ export default {
 .qiniu{
   padding: 6px;
   position: relative;
+  .water-img{
+    height: 190px;
+    width: 190px;
+  }
 }
 </style>
