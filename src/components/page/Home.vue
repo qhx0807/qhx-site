@@ -198,7 +198,7 @@ export default {
         }
       }
       .top-my{
-        width: 60%;
+        width: 100%;
         margin: auto;
         font-size: 14px;
         color: #EAEADF;
@@ -212,7 +212,7 @@ export default {
         }
       }
       .top-jscb{
-        width: 60%;
+        width: 100%;
         margin: auto;
         font-size: 14px;
         color: #EAEADF;
