@@ -16,7 +16,9 @@
           <BreadcrumbItem>控制台</BreadcrumbItem>
         </Breadcrumb> -->
         <div class="rw">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </div>
       </div>
     </div>
