@@ -8,24 +8,24 @@
         </div>
         <div class="his-content">
           <ul>
-            <li>
+            <li v-for="item in tableData" :key="item._id">
               <div class="li-left">
-                <span class="year">2017</span>
-                <span class="md">0807</span>
+                <span class="year">{{getDate(item.date, 'y')}}</span>
+                <span class="md">{{getDate(item.date, 'm')}}{{getDate(item.date, 'd')}}</span>
               </div>
               <div class="point">
                 <b class="active-point"></b>
               </div>
               <div class="liright">
                 <div class="lr-title">
-                  <router-link to="/">HTML5发展历史</router-link>
+                  <router-link to="/">{{item.title}}</router-link>
                 </div>
                 <div class="lr-info">
-                  随着用户的访问量增大,功能不能满足需求，我们进行了重大更新，对设计和功能都进行大幅度的升级,增加了原创，欣赏版块
+                  {{item.intro}}
                 </div>
               </div>
             </li>
-            <li>
+            <!-- <li>
               <div class="li-left">
                 <span class="year">2017</span>
                 <span class="md">0807</span>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="lr-info">随着用户的访问量增大,功能不能满足需求，我们进行了重大更新，对设计和功能都进行大幅度的升级,增加了原创，欣赏版块</div>
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -53,10 +53,13 @@
 import Home from './Home'
 import FooterPage from './FooterPage'
 import { BackTop } from 'iview'
+import axios from 'axios'
 export default {
   name: 'archives',
   data() {
-    return {}
+    return {
+      tableData:[],
+    }
   },
   components: {
     Home,
@@ -64,9 +67,33 @@ export default {
     BackTop
   },
   computed: {},
-  created() {},
+  created() {
+    this.getArchList()
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    getArchList() {
+      axios.get(API_URL + '/notes').then(function(response) {
+        console.log(response)
+        this.tableData = response.data.Data
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
+    getDate(val, type){
+      let date = val.substring(0,10)
+      let d = date.split("-")
+      if(type=='y'){
+        return d[0]
+      }else if(type=='m'){
+        return d[1]
+      }
+      else if(type=='d'){
+        return d[2]
+      }else{
+        return date
+      }
+    }
+  }
 }
 </script>
 

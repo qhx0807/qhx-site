@@ -4,7 +4,11 @@
     <div class="content">
       <div class="notice">
         <i class="iconfont icon-shuye"></i>
-        <div class="notice-content">注意： 人生本来就没有相欠。别人对你付</div>
+        <div class="notice-content">
+          {{noticeData[0] ? noticeData[0].content : ''}}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-size:12px;">{{noticeData[0] ? noticeData[0].date : ''}}</span>
+        </div>
       </div>
       <div class="feature">
         <h1 class="fe-title">聚焦</h1>
@@ -24,18 +28,16 @@
       <div class="area">
         <div class="main">
           <h1 class="main-title">近况</h1>
-          <article class="note-item">
+          <article class="note-item" v-for="item in notesData" :key="item._id" @mouseover="onOverAricle(item._id)" @mouseout="onOutAricle">
             <div class="note-inner">
               <div class="note-left">
-                <img src="http://www.aktax.cn/wp-content/themes/akina/images/random/deu4.jpg" alt="">
+                <img :class="{route : isActive==item._id}" :src="item.titleImg">
               </div>
               <div class="note-title">
-                  <router-link to="/">Linux目录结构详解</router-link>
+                  <router-link to="/">{{item.title}}</router-link>
               </div>
-              <div class="note-time">2018-12-12</div>
-              <p class="note-con">/ root，根目录。 文件系统的入口，最高一级目录。 只有root用户具有该目录下的写权限。请注意，/root是root用户的主目 录，这与/.不 一样。 /bin User Binar...
-                有root用户具有该目录下的写权限。请注意，/root是root用户的主目 录，这与/.不 一
-              </p>
+              <div class="note-time">{{item.date ? item.date.substring(0,10) : ''}}</div>
+              <p class="note-con" v-html="item.intro"></p>
               <div class="note-footer">
                 <router-link to="/">
                   <i class="iconfont icon-gengduo1"></i>
@@ -43,30 +45,10 @@
               </div>
             </div>
             <hr class="hr">
-            <div class="note-info active">
-              <p><i class="iconfont icon-pinglun1"></i>&nbsp;<span>1 条评论</span></p>
-              <p><i class="iconfont icon-kan"></i>&nbsp;<span>1002 热度</span></p>
+            <div class="note-info" :class="{active : isActive==item._id}">
+              <p><i class="iconfont icon-pinglun1"></i>&nbsp;<span>{{item.commits.length}} 条评论</span></p>
+              <p><i class="iconfont icon-kan"></i>&nbsp;<span>{{item.watch}} 热度</span></p>
             </div>
-          </article>
-          <article class="note-item">
-            <div class="note-inner">
-              <div class="note-left">
-                <img class="route" src="http://www.aktax.cn/wp-content/themes/akina/images/random/deu4.jpg" alt="">
-              </div>
-              <div class="note-title">
-                  <router-link to="/">Linux目录结构详解</router-link>
-              </div>
-              <div class="note-time">2018-12-12</div>
-              <p class="note-con">/ root，根目录。 文件系统的入口，最高一级目录。 只有root用户具有该目录下的写权限。请注意，/root是root用户的主目 录，这与/.不 一样。 /bin User Binar...
-                有root用户具有该目录下的写权限。请注意，/root是root用户的主目 录，这与/.不 一
-              </p>
-              <div class="note-footer">
-                <router-link to="/">
-                  <i class="iconfont icon-gengduo1"></i>
-                </router-link>
-              </div>
-            </div>
-            <hr class="hr">
           </article>
         </div>
       </div>
@@ -83,11 +65,14 @@
 import Home from './Home'
 import FooterPage from './FooterPage'
 import { BackTop } from 'iview'
+import axios from 'axios'
 export default {
   name: 'index',
   data() {
     return {
-
+      noticeData:[],
+      notesData:[],
+      isActive:'',
     }
   },
   components:{
@@ -96,10 +81,29 @@ export default {
     BackTop
   },
   created () {
-    
+    this.getNotice()
+    this.getNotes()
   },
   methods: {
-    
+    getNotice(){
+      axios.get(API_URL + '/notice').then(function(response) {
+        this.noticeData = response.data.Data
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
+    getNotes(){
+      axios.get(API_URL + '/notes').then(function(response) {
+        console.log(response)
+        this.notesData = response.data.Data
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
+    onOverAricle(id){
+      this.isActive = id
+    },
+    onOutAricle(){
+      this.isActive = ''
+    },
   }
 }
 </script>
@@ -257,6 +261,8 @@ export default {
               border-radius: 50%;
               padding: 2px;
               transition: 0.6s all ease;
+              height: 100px;
+              width: 100px;
               &.route{
                 transform:rotate(360deg);
               }

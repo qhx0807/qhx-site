@@ -4,7 +4,7 @@
     <div class="content">
       <svg :width='width' :height='height' @mousemove='listener($event)'>
         <a v-for='(tag, index) in tags' :key="index">
-            <text :x='tag.x' :y='tag.y' :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)'>{{tag.text}}</text>
+            <text :x='tag.x' :y='tag.y' :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)'>{{tag.name}}</text>
         </a>
       </svg>
     </div>
@@ -17,13 +17,14 @@
 import Home from './Home'
 import FooterPage from './FooterPage'
 import { BackTop } from 'iview'
+import axios from 'axios'
 export default {
   name: 'tags',
   data() {
     return {
       tags: [],
-      width: 800, //svg宽度
-      height: 600, //svg高度
+      width: 700, //svg宽度
+      height: 500, //svg高度
       tagsNum: 26, //标签数量
       RADIUS: 200, //球的半径
       speedX: Math.PI / 360, //球一帧绕x轴旋转的角度
@@ -37,11 +38,9 @@ export default {
   },
   computed: {
     CX() {
-      //球心x坐标
       return this.width / 2
     },
     CY() {
-      //球心y坐标
       return this.height / 2
     }
   },
@@ -49,7 +48,6 @@ export default {
     this.tagInit()
   },
   mounted() {
-    //使球开始旋转
     setInterval(() => {
       this.rotateX(this.speedX)
       this.rotateY(this.speedY)
@@ -57,7 +55,6 @@ export default {
   },
   methods: {
     listener(event) {
-      //响应鼠标移动
       var x = event.clientX - this.CX
       var y = event.clientY - this.CY
       this.speedX =
@@ -71,19 +68,24 @@ export default {
     },
     tagInit() {
       let tags = []
-      for (let i = 0; i < this.tagsNum; i++) {
-        let tag = {}
-        let k = -1 + (2 * (i + 1) - 1) / this.tagsNum
-        let a = Math.acos(k)
-        let b = a * Math.sqrt(this.tagsNum * Math.PI) //计算标签相对于球心的角度
-        tag.text = i + 'tag'
-        tag.x = this.CX + this.RADIUS * Math.sin(a) * Math.cos(b) //根据标签角度求出标签的x,y,z坐标
-        tag.y = this.CY + this.RADIUS * Math.sin(a) * Math.sin(b)
-        tag.z = this.RADIUS * Math.cos(a)
-        tag.href = 'https://imgss.github.io' //给标签添加链接
-        tags.push(tag)
-      }
-      this.tags = tags
+      axios.get(API_URL + '/tags').then(function(response) {
+        let tagData = response.data.Data.concat(response.data.Data)
+        for (let i = 0; i < tagData.length; i++) {
+          let tag = {}
+          let k = -1 + (2 * (i + 1) - 1) / this.tagsNum
+          let a = Math.acos(k)
+          let b = a * Math.sqrt(this.tagsNum * Math.PI)
+          tag.name = tagData[i].name
+          tag.x = this.CX + this.RADIUS * Math.sin(a) * Math.cos(b) 
+          tag.y = this.CY + this.RADIUS * Math.sin(a) * Math.sin(b)
+          tag.z = this.RADIUS * Math.cos(a)
+          tag.href = 'https://imgss.github.io' 
+          tags.push(tag)
+        }
+        console.log(tags)
+        this.tags = tags
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
     },
     rotateX(angleX) {
       var cos = Math.cos(angleX)
