@@ -22,7 +22,7 @@
           </div>
           <div class="data-num">
             <p>今日浏览量</p>
-            <p>2123</p>
+            <p>{{staData.tpv}}</p>
           </div>
         </div>
       </Card>
@@ -35,7 +35,7 @@
           </div>
           <div class="data-num">
             <p>历史浏览量</p>
-            <p>2123</p>
+            <p>{{staData.pv}}</p>
           </div>
         </div>
       </Card>
@@ -48,7 +48,7 @@
           </div>
           <div class="data-num">
             <p>点赞</p>
-            <p>2123</p>
+            <p>{{staData.like}}</p>
           </div>
         </div>
       </Card>
@@ -61,7 +61,7 @@
           </div>
           <div class="data-num">
             <p>照片</p>
-            <p>2123</p>
+            <p>{{staData.photo}}</p>
           </div>
         </div>
       </Card>
@@ -74,7 +74,7 @@
           </div>
           <div class="data-num">
             <p>服务调用</p>
-            <p>2123</p>
+            <p>{{staData.api}}</p>
           </div>
         </div>
       </Card>
@@ -100,7 +100,7 @@
           </div>
           <div class="data-num">
             <p>今日服务调用</p>
-            <p>2123</p>
+            <p>{{staData.tapi}}</p>
           </div>
         </div>
       </Card>
@@ -110,6 +110,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'dashboard',
   data() {
@@ -120,6 +121,7 @@ export default {
       lastLoginCity: '',
       lastLoginIp: '',
       headImg: '',
+      staData:{},
     }
   },
   created() {
@@ -130,9 +132,15 @@ export default {
     this.lastLoginCity = sessionStorage.lastLoginCity
     this.lastLoginIp = sessionStorage.lastLoginIp
     this.headImg = sessionStorage.headImg
+    this.getData()
   },
   methods: {
-
+    getData(){
+      axios.get(API_URL + '/sta').then(function(response) {
+        this.staData = response.data
+      }.bind(this)).catch(function(error) {
+      }.bind(this))
+    },
   }
 }
 </script>
