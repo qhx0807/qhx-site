@@ -4,7 +4,7 @@
     <div class="msg-content">
       <div class="msg-from">
         <aside class="msg-from-head">123</aside>
-        <textarea></textarea>
+        <textarea placeholder="请给我留言~"></textarea>
         <div class="msg-from-foot">
           <div class="user-fields">
             <label>
@@ -75,6 +75,11 @@ export default {
       width: 800px;
       &:after{
         clear: both;
+        content:'';
+        display:block;
+        width:0;
+        height:0;
+        visibility:hidden;
       }
       .user-fields {
         float: right;
@@ -104,6 +109,7 @@ export default {
             font-size: 14px;
             background-color: #A0DAD0;
             color: #fff;
+            cursor: pointer;
           }
         }
         
