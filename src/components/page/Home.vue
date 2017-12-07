@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Headermenu></Headermenu>
-    <div class="home-top">
+    <div class="home-top" :style="{backgroundImage: 'url('+dailyObj.picture2+')'}">
       <div class="slant slant-left"></div>
       <div class="slant slant-right"></div>
       <div class="top-info">
@@ -140,6 +140,7 @@ export default {
     getEveryDay(){
       axios.get(API_URL + '/daily').then(function(response) {
         this.dailyObj = JSON.parse(response.data.Data)
+        console.log(this.dailyObj)
       }.bind(this)).catch(function(error) {
       }.bind(this))
     },
@@ -152,7 +153,7 @@ export default {
   
   .home-top{
     height: 650px;
-    background-image: url('http://www.aktax.cn/wp-content/themes/akina/images/headerbg6.jpg');
+    background-image: url('http://cdn.iciba.com/news/word/big_20170908b.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;

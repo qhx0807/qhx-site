@@ -28,12 +28,12 @@
       <div class="area">
         <div class="main">
           <h1 class="main-title">近况</h1>
-          <article class="note-item" v-for="item in notesData" :key="item._id" @mouseover="onOverAricle(item._id)" @mouseout="onOutAricle">
+          <article class="note-item" v-for="item in notesData" :key="item._id">
             <div class="note-inner">
-              <div class="note-left">
+              <div class="note-left"  @mouseover="onOverAricle(item._id)" @mouseout="onOutAricle">
                 <img :class="{route : isActive==item._id}" :src="item.titleImg">
               </div>
-              <div class="note-title">
+              <div class="note-title"  @mouseover="onOverAricle(item._id)" @mouseout="onOutAricle">
                   <router-link to="/">{{item.title}}</router-link>
               </div>
               <div class="note-time">{{item.date ? item.date.substring(0,10) : ''}}</div>
