@@ -4,6 +4,8 @@ const Header = resolve => require(['@/components/page/Header'], resolve)
 const IndexPage = resolve => require(['@/components/page/IndexPage'], resolve)
 const Tags = resolve => require(['@/components/page/Tags'], resolve)
 const Archives = resolve => require(['@/components/page/Archives'], resolve)
+const Msg = resolve => require(['@/components/page/Message'], resolve)
+const Pto = resolve => require(['@/components/page/Photo'], resolve)
 
 const Login = resolve => require(['@/components/admin/Login'], resolve)
 const Admin = resolve => require(['@/components/admin/Admin'], resolve)
@@ -33,6 +35,16 @@ export default new Router({
       path: '/tags',
       name: 'Tags',
       component: Tags
+    },
+    {
+      path: '/message',
+      name: 'Msg',
+      component: Msg
+    },
+    {
+      path: '/photo',
+      name: 'Pto',
+      component: Pto
     },
     {
       path: '/archives',
