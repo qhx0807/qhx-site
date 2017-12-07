@@ -1,7 +1,7 @@
 <template>
   <div>
     <Home></Home>
-    <div>
+    <div class="photo-content">
       photo
     </div>
     <FooterPage></FooterPage>
@@ -34,5 +34,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.photo-content {
+  max-width: 800px;
+  padding: 0 10px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
 </style>
