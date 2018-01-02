@@ -17,7 +17,7 @@ export default {
     flag: [String, Number],
     maxSize: {
       type: Number,
-      default: 0 
+      default: 0
     }
   },
   methods: {
